@@ -30,11 +30,18 @@ pluginManagement {
 
 val ignored = listOf("build", ".gradle", ".idea", ".kotlin", ".git", ".github", "scripts", "build-logic", "assets")
 val projectNames = mutableListOf<String>()
-rootDir.walk().onEnter { !ignored.contains(it.name) }.filter { it.isDirectory }
-    .map { it.path.replace(rootDir.path, "") }.forEach { path ->
+
+rootDir.walk()
+    .onEnter { val name = it.name; !ignored.contains(name) && !name.startsWith('.') }
+    .filter { it.isDirectory }
+    .map { it.path.replace(rootDir.path, "") }
+    .forEach { path ->
+        val segments = path.split(separator).filter { it.isNotEmpty() }
+        if (segments.any { it.startsWith('.') }) return@forEach
+
         val buildGradleFile = File("$rootDir/$path", "build.gradle.kts")
         if (buildGradleFile.exists()) {
-            val pathString = path.replace(separator, ":")
+            val pathString = segments.joinToString(separator = ":", prefix = ":")
 
             projectNames.add(pathString)
             include(pathString)
