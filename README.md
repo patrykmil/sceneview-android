@@ -160,6 +160,8 @@ Scene(
 - [Camera Manipulator (Compose)](/samples/camera-manipulator-compose)
 - [gtTF Camera (Compose)](/samples/gltf-camera)
 
+
+
 ## <a name="ar-scene-with-arcore"></a>AR Scene with ARCore
 
 ### <a name="ar-installation"></a>Installation
@@ -236,6 +238,12 @@ ARScene(
 - [AR Augmented Image](/samples/ar-augmented-image)
 - [AR Cloud Anchors](/samples/ar-cloud-anchor)
 - [AR Point Cloud](/samples/ar-point-cloud)
+
+```bash
+./gradlew :samples:ar-model-viewer:installDebug
+./gradlew :samples:ar-augmented-image:installDebug
+```
+
 
 ## Resources
 
